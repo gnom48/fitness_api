@@ -1,0 +1,35 @@
+services:
+  db:
+    container_name: db_postgres
+    image: postgres:15.3-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: postgres
+    ports:
+      - "8888:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - my_network
+
+  app:
+    container_name: app_fast_api
+    build: ./
+    depends_on:
+      - db
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; uvicorn app.main:app --host 0.0.0.0 --port 8080'
+    ports:
+      - 8889:8080
+    restart: always
+    networks:
+      - my_network
+
+volumes:
+  postgres-data:
+
+networks:
+  my_network:
+    driver: bridge
