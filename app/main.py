@@ -24,7 +24,7 @@ router_main = APIRouter(prefix="/main", tags=["Config"])
 
 @router_main.get("/get_config", status_code=200)
 async def get_all_services():
-    return await Repository.get_config()
+    return await DBRepository.get_config()
 
 
 app = FastAPI(lifespan=lifespan)
