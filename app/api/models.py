@@ -12,7 +12,7 @@ class PersonalDataModel(BaseModel):
     weight: float
     height: float
     fitness_level: Optional[str] = None
-    goal: Optional[str] = None
+    goal: Optional[float] = None
 
 class WorkoutModel(BaseModel):
     id: int
