@@ -20,7 +20,7 @@ class PersonalData(BaseModelOrm):
     weight = Column(DECIMAL(5, 2), nullable=False)
     height = Column(DECIMAL(5, 2), nullable=False)
     fitness_level = Column(String(50))
-    goal = Column(String(255))
+    goal = Column(DECIMAL(5, 2))
 
 class Workout(BaseModelOrm):
     __tablename__ = 'workouts'
