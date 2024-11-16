@@ -25,6 +25,7 @@ class ExerciseModel(BaseModel):
     workout_text: Optional[str] = None
     workout_time_minutes: Optional[int] = None
     calories_burned: Optional[int] = None
+    video_url: Optional[str] = None
     image_url: Optional[str] = None
 
 class StatisticModel(BaseModel):
@@ -40,7 +41,9 @@ class WorkoutHistoryModel(BaseModel):
 class NutritionModel(BaseModel):
     id: int
     recipe_name: str
+    recipe_text: str
     calories: Optional[int] = None
     protein: Optional[float] = None
     fat: Optional[float] = None
     carbohydrates: Optional[float] = None
+    image_url: Optional[str]

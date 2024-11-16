@@ -37,6 +37,7 @@ class Exercise(BaseModelOrm):
     workout_text = Column(Text)
     workout_time_minutes = Column(Integer)
     calories_burned = Column(Integer)
+    video_url = Column(String(255))
     image_url = Column(String(255))
 
     workout = relationship('Workout', back_populates='exercises')
@@ -62,7 +63,9 @@ class Nutrition(BaseModelOrm):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     recipe_name = Column(String(255), nullable=False)
+    recipe_text = Column(String(255))
     calories = Column(Integer)
     protein = Column(DECIMAL(5, 2))
     fat = Column(DECIMAL(5, 2))
     carbohydrates = Column(DECIMAL(5, 2))
+    image_url = Column(String(255))
