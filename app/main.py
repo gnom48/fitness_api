@@ -13,8 +13,8 @@ from .database import create_tables, drop_tables
 async def lifespan(app: FastAPI):
     # await drop_tables()
     # print("База данных очищена")
-    await create_tables()
-    print("База данных создана")
+    # await create_tables()
+    # print("База данных создана")
     print("Запуск сервера ...")
     yield
     print("Выключение сервера ...")

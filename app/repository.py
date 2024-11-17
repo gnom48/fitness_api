@@ -11,12 +11,12 @@ from pydantic import BaseModel
 import time
 
 assotiative_types = {
-    PersonalDataModel: PersonalData,
-    WorkoutModel: Workout,
-    ExerciseModel: Exercise,
-    StatisticModel: Statistic,
-    WorkoutHistoryModel: WorkoutHistory,
-    NutritionModel: Nutrition,
+    PersonalDataModel: PersonalDataOrm,
+    WorkoutModel: WorkoutOrm,
+    ExerciseModel: ExerciseOrm,
+    StatisticModel: StatisticOrm,
+    WorkoutHistoryModel: WorkoutHistoryOrm,
+    NutritionModel: NutritionOrm,
 }
 
 class DBRepository:
@@ -83,13 +83,27 @@ class DBRepository:
     # -------------------------------- person -------------------------------- #
 
     @classmethod
-    async def get_personal_data_by_login_password(cls, contact_info: str, password: str) -> Optional[PersonalData]:
+    async def get_personal_data_by_login_password(cls, contact_info: str, password: str) -> Optional[PersonalDataOrm]:
         async with new_session() as session:
             try:                
                 result = await session.execute(
-                    select(PersonalData).where(PersonalData.contact_info == contact_info, PersonalData.password == password)
+                    select(PersonalDataOrm).where(PersonalDataOrm.contact_info == contact_info, PersonalDataOrm.password == password)
                 )
                 return result.scalars().first()
+            except Exception as e:
+                print(e)
+                return None
+
+    # -------------------------------- workouts -------------------------------- #
+
+    @classmethod
+    async def get_exercises_in_workout(cls, workout_id: int) -> list[ExerciseOrm]:
+        async with new_session() as session:
+            try:                
+                result = await session.execute(
+                    select(ExerciseOrm).where(ExerciseOrm.workout_id == workout_id)
+                )
+                return list(result.scalars().all())
             except Exception as e:
                 print(e)
                 return None

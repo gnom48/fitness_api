@@ -8,7 +8,7 @@ from sqlalchemy.sql import func
 class BaseModelOrm(DeclarativeBase):
     ...
 
-class PersonalData(BaseModelOrm):
+class PersonalDataOrm(BaseModelOrm):
     __tablename__ = 'personal_data'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -22,14 +22,14 @@ class PersonalData(BaseModelOrm):
     fitness_level = Column(String(50))
     goal = Column(DECIMAL(5, 2))
 
-class Workout(BaseModelOrm):
+class WorkoutOrm(BaseModelOrm):
     __tablename__ = 'workouts'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(255), nullable=False)
     image_url = Column(String(255))
 
-class Exercise(BaseModelOrm):
+class ExerciseOrm(BaseModelOrm):
     __tablename__ = 'exercises'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -43,23 +43,23 @@ class Exercise(BaseModelOrm):
 
     workout = relationship('Workout', back_populates='exercises')
 
-Workout.exercises = relationship('Exercise', order_by=Exercise.id, back_populates='workout')
+WorkoutOrm.exercises = relationship('Exercise', order_by=ExerciseOrm.id, back_populates='workout')
 
-class Statistic(BaseModelOrm):
+class StatisticOrm(BaseModelOrm):
     __tablename__ = 'statistics'
 
     user_id = Column(Integer, ForeignKey('personal_data.id', ondelete='CASCADE'), primary_key=True)
     weight = Column(DECIMAL(5, 2), nullable=False)
     timestamp = Column(DateTime, default=func.current_timestamp())
 
-class WorkoutHistory(BaseModelOrm):
+class WorkoutHistoryOrm(BaseModelOrm):
     __tablename__ = 'workout_history'
 
     user_id = Column(Integer, ForeignKey('personal_data.id', ondelete='CASCADE'), primary_key=True)
     workout_id = Column(Integer, ForeignKey('workouts.id', ondelete='CASCADE'), primary_key=True)
     timestamp = Column(DateTime, default=func.current_timestamp())
 
-class Nutrition(BaseModelOrm):
+class NutritionOrm(BaseModelOrm):
     __tablename__ = 'nutrition'
 
     id = Column(Integer, primary_key=True, autoincrement=True)

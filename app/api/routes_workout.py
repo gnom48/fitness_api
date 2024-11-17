@@ -30,6 +30,14 @@ async def read_workout(id: int):
     else:
         raise HTTPException(status_code=404, detail="Workout not found")
 
+@router_workout.get("/workouts/{id}/exercises", response_model=List[ExerciseModel])
+async def read_workout(id: int):
+    exercises = await DBRepository.get_exercises_in_workout(id)
+    if exercises:
+        return exercises
+    else:
+        raise HTTPException(status_code=404, detail="Workout or exercises not found")
+
 @router_workout.put("/workouts/{id}")
 async def update_workout(id: int, workout: WorkoutModel):
     success = await DBRepository.update_entity(id, workout)
