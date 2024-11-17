@@ -33,7 +33,7 @@ class ExerciseOrm(BaseModelOrm):
     __tablename__ = 'exercises'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    workout_id = Column(Integer, ForeignKey('workouts.id', ondelete='CASCADE'), nullable=False)
+    workout_id = Column(Integer, ForeignKey(WorkoutOrm.id, ondelete='CASCADE'), nullable=False)
     name = Column(String(255), nullable=False)
     workout_text = Column(Text)
     workout_time_minutes = Column(Integer)
@@ -41,22 +41,22 @@ class ExerciseOrm(BaseModelOrm):
     video_url = Column(String(255))
     image_url = Column(String(255))
 
-    workout = relationship('Workout', back_populates='exercises')
+#     workout = relationship('Workout', back_populates='exercises')
 
-WorkoutOrm.exercises = relationship('Exercise', order_by=ExerciseOrm.id, back_populates='workout')
+# WorkoutOrm.exercises = relationship('Exercise', order_by=ExerciseOrm.id, back_populates='workout')
 
 class StatisticOrm(BaseModelOrm):
     __tablename__ = 'statistics'
 
-    user_id = Column(Integer, ForeignKey('personal_data.id', ondelete='CASCADE'), primary_key=True)
+    user_id = Column(Integer, ForeignKey(PersonalDataOrm.id, ondelete='CASCADE'), primary_key=True)
     weight = Column(DECIMAL(5, 2), nullable=False)
     timestamp = Column(DateTime, default=func.current_timestamp())
 
 class WorkoutHistoryOrm(BaseModelOrm):
     __tablename__ = 'workout_history'
 
-    user_id = Column(Integer, ForeignKey('personal_data.id', ondelete='CASCADE'), primary_key=True)
-    workout_id = Column(Integer, ForeignKey('workouts.id', ondelete='CASCADE'), primary_key=True)
+    user_id = Column(Integer, ForeignKey(PersonalDataOrm.id, ondelete='CASCADE'), primary_key=True)
+    workout_id = Column(Integer, ForeignKey(WorkoutOrm.id, ondelete='CASCADE'), primary_key=True)
     timestamp = Column(DateTime, default=func.current_timestamp())
 
 class NutritionOrm(BaseModelOrm):
