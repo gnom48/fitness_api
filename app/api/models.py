@@ -17,6 +17,7 @@ class PersonalDataModel(BaseModel):
 class WorkoutModel(BaseModel):
     id: int
     name: str
+    image_url: Optional[str] = None
 
 class ExerciseModel(BaseModel):
     id: int

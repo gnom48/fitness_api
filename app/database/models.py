@@ -27,6 +27,7 @@ class Workout(BaseModelOrm):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(255), nullable=False)
+    image_url = Column(String(255))
 
 class Exercise(BaseModelOrm):
     __tablename__ = 'exercises'
