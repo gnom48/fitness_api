@@ -22,9 +22,9 @@ async def read_all_statistics():
     else:
         raise HTTPException(status_code=500, detail="Failed to retrieve statistics")
 
-@router_statistics.get("/statistics/{id}", response_model=StatisticModel)
+@router_statistics.get("/statistics/{id}", response_model=list[StatisticModel])
 async def read_statistic(id: int):
-    statistic = await DBRepository.get_statistics(StatisticModel, id)
+    statistic = await DBRepository.get_statistics(id)
     if statistic:
         return statistic
     else:
@@ -62,7 +62,7 @@ async def read_all_workout_history():
     else:
         raise HTTPException(status_code=500, detail="Failed to retrieve workout history")
 
-@router_statistics.get("/workout_history/{id}", response_model=WorkoutHistoryModel)
+@router_statistics.get("/workout_history/{id}", response_model=list[WorkoutHistoryViewModel])
 async def read_workout_history(id: int):
     workout_history = await DBRepository.get_workout_history_view(id)
     if workout_history:
