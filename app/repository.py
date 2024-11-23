@@ -9,6 +9,7 @@ import logging
 from sqlalchemy import select, update, delete, and_
 from pydantic import BaseModel
 import time
+from types import SimpleNamespace
 
 assotiative_types = {
     PersonalDataModel: PersonalDataOrm,
@@ -102,6 +103,42 @@ class DBRepository:
             try:                
                 result = await session.execute(
                     select(ExerciseOrm).where(ExerciseOrm.workout_id == workout_id)
+                )
+                return list(result.scalars().all())
+            except Exception as e:
+                print(e)
+                return None
+    
+    @classmethod
+    async def get_workout_history_view(cls, user_id: int) -> list[WorkoutHistoryViewOrm]:
+        async with new_session() as session:
+            try:
+                result = await session.execute(
+                    select(WorkoutHistoryViewOrm).where(WorkoutHistoryViewOrm.user_id == user_id)
+                )
+                return list(result.scalars().all())
+            except Exception as e:
+                print(e)
+                return None
+
+    @classmethod
+    async def get_workout_history_view(cls, user_id: int) -> list[WorkoutHistoryViewOrm]:
+        async with new_session() as session:
+            try:
+                result = await session.execute(
+                    select(WorkoutHistoryViewOrm).where(WorkoutHistoryViewOrm.user_id == user_id)
+                )
+                return list(result.scalars().all())
+            except Exception as e:
+                print(e)
+                return None
+            
+    @classmethod
+    async def get_statistics(cls, user_id: int) -> list[StatisticOrm]:
+        async with new_session() as session:
+            try:
+                result = await session.execute(
+                    select(StatisticOrm).where(StatisticOrm.user_id == user_id)
                 )
                 return list(result.scalars().all())
             except Exception as e:

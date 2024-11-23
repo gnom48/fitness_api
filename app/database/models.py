@@ -36,21 +36,18 @@ class ExerciseOrm(BaseModelOrm):
     workout_id = Column(Integer, ForeignKey(WorkoutOrm.id, ondelete='CASCADE'), nullable=False)
     name = Column(String(255), nullable=False)
     workout_text = Column(Text)
-    workout_time_minutes = Column(Integer)
+    workout_time = Column(Integer)
+    workout_count = Column(Integer, default=0)
     calories_burned = Column(Integer)
     video_url = Column(String(255))
     image_url = Column(String(255))
-
-#     workout = relationship('Workout', back_populates='exercises')
-
-# WorkoutOrm.exercises = relationship('Exercise', order_by=ExerciseOrm.id, back_populates='workout')
 
 class StatisticOrm(BaseModelOrm):
     __tablename__ = 'statistics'
 
     user_id = Column(Integer, ForeignKey(PersonalDataOrm.id, ondelete='CASCADE'), primary_key=True)
     weight = Column(DECIMAL(5, 2), nullable=False)
-    timestamp = Column(DateTime, default=func.current_timestamp())
+    timestamp = Column(DateTime, default=func.current_timestamp(), primary_key=True)
 
 class WorkoutHistoryOrm(BaseModelOrm):
     __tablename__ = 'workout_history'
@@ -58,6 +55,17 @@ class WorkoutHistoryOrm(BaseModelOrm):
     user_id = Column(Integer, ForeignKey(PersonalDataOrm.id, ondelete='CASCADE'), primary_key=True)
     workout_id = Column(Integer, ForeignKey(WorkoutOrm.id, ondelete='CASCADE'), primary_key=True)
     timestamp = Column(DateTime, default=func.current_timestamp())
+    workout_length = Column(Integer, default=0)
+    
+class WorkoutHistoryViewOrm(BaseModelOrm):
+    __tablename__ = 'workout_history_view'
+
+    user_id = Column(Integer, ForeignKey(PersonalDataOrm.id, ondelete='CASCADE'), primary_key=True)
+    workout_id = Column(Integer, ForeignKey(WorkoutOrm.id, ondelete='CASCADE'), primary_key=True)
+    timestamp = Column(DateTime, default=func.current_timestamp())
+    workout_length = Column(Integer, default=0)
+    calories = Column(Integer, default=0)
+    image_url = Column(String(255))
 
 class NutritionOrm(BaseModelOrm):
     __tablename__ = 'nutrition'

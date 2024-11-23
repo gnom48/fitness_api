@@ -24,7 +24,7 @@ async def read_all_statistics():
 
 @router_statistics.get("/statistics/{id}", response_model=StatisticModel)
 async def read_statistic(id: int):
-    statistic = await DBRepository.get_entity_by_id(StatisticModel, id)
+    statistic = await DBRepository.get_statistics(StatisticModel, id)
     if statistic:
         return statistic
     else:
@@ -64,7 +64,7 @@ async def read_all_workout_history():
 
 @router_statistics.get("/workout_history/{id}", response_model=WorkoutHistoryModel)
 async def read_workout_history(id: int):
-    workout_history = await DBRepository.get_entity_by_id(WorkoutHistoryModel, id)
+    workout_history = await DBRepository.get_workout_history_view(id)
     if workout_history:
         return workout_history
     else:

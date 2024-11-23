@@ -25,6 +25,7 @@ class ExerciseModel(BaseModel):
     name: str
     workout_text: Optional[str] = None
     workout_time_minutes: Optional[int] = None
+    workout_count: Optional[int]
     calories_burned: Optional[int] = None
     video_url: Optional[str] = None
     image_url: Optional[str] = None
@@ -38,6 +39,15 @@ class WorkoutHistoryModel(BaseModel):
     user_id: int
     workout_id: int
     timestamp: datetime = Field(default_factory=datetime.now)
+    workout_length: int
+
+class WorkoutHistoryViewModel(BaseModel):
+    user_id: int
+    workout_id: int
+    timestamp: datetime = Field(default_factory=datetime.now)
+    workout_length: int
+    calories: Optional[int]
+    image_url: Optional[str] = None
 
 class NutritionModel(BaseModel):
     id: int
