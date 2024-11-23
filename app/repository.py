@@ -110,19 +110,7 @@ class DBRepository:
                 return None
     
     @classmethod
-    async def get_workout_history_view(cls, user_id: int) -> list[WorkoutHistoryViewOrm]:
-        async with new_session() as session:
-            try:
-                result = await session.execute(
-                    select(WorkoutHistoryViewOrm).where(WorkoutHistoryViewOrm.user_id == user_id)
-                )
-                return list(result.scalars().all())
-            except Exception as e:
-                print(e)
-                return None
-
-    @classmethod
-    async def get_workout_history_view(cls, user_id: int) -> list[WorkoutHistoryViewOrm]:
+    async def get_workout_history_view(cls, user_id: int) -> list[WorkoutHistoryViewModel]:
         async with new_session() as session:
             try:
                 result = await session.execute(
@@ -134,7 +122,7 @@ class DBRepository:
                 return None
             
     @classmethod
-    async def get_statistics(cls, user_id: int) -> list[StatisticOrm]:
+    async def get_statistics(cls, user_id: int) -> list[StatisticModel]:
         async with new_session() as session:
             try:
                 result = await session.execute(
