@@ -62,7 +62,7 @@ async def read_all_workout_history():
     else:
         raise HTTPException(status_code=500, detail="Failed to retrieve workout history")
 
-@router_statistics.get("/workout_history/{id}", response_model=list[WorkoutHistoryViewModel])
+@router_statistics.get("/workout_history/{id}", response_model=List[WorkoutHistoryViewModel])
 async def read_workout_history(id: int):
     workout_history = await DBRepository.get_workout_history_view(id)
     if workout_history:

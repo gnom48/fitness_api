@@ -116,7 +116,10 @@ class DBRepository:
                 result = await session.execute(
                     select(WorkoutHistoryViewOrm).where(WorkoutHistoryViewOrm.user_id == user_id)
                 )
-                return list(result.scalars().all())
+                # return list(result.scalars().all())
+                workout_history = result.scalars().all()
+                print(f"Fetched get_workout_history_view: {workout_history}")  # Логирование данных для отладки
+                return list(workout_history)
             except Exception as e:
                 print(e)
                 return None
