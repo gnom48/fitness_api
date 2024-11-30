@@ -60,9 +60,9 @@ class WorkoutHistoryOrm(BaseModelOrm):
 class WorkoutHistoryViewOrm(BaseModelOrm):
     __tablename__ = 'workout_history_view'
 
-    user_id = Column(Integer)
-    workout_id = Column(Integer)
-    timestamp = Column(DateTime)
+    user_id = Column(Integer, primary_key=True)
+    workout_id = Column(Integer, primary_key=True)
+    timestamp = Column(DateTime, primary_key=True)
     workout_length = Column(Integer)
     calories = Column(Integer)
     image_url = Column(String(255))
