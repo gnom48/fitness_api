@@ -44,10 +44,10 @@ class WorkoutHistoryModel(BaseModel):
 class WorkoutHistoryViewModel(BaseModel):
     user_id: int
     workout_id: int
-    timestamp: datetime = Field(default_factory=datetime.now)
+    timestamp: datetime
     workout_length: int
     calories: Optional[int]
-    image_url: Optional[str] = None
+    image_url: Optional[str]
 
 class NutritionModel(BaseModel):
     id: int

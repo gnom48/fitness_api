@@ -54,14 +54,14 @@ class WorkoutHistoryOrm(BaseModelOrm):
 
     user_id = Column(Integer, ForeignKey(PersonalDataOrm.id, ondelete='CASCADE'), primary_key=True)
     workout_id = Column(Integer, ForeignKey(WorkoutOrm.id, ondelete='CASCADE'), primary_key=True)
-    timestamp = Column(DateTime, default=func.current_timestamp())
-    workout_length = Column(Integer, default=0)
+    timestamp = Column(DateTime, primary_key=True)
+    workout_length = Column(Integer)
     
 class WorkoutHistoryViewOrm(BaseModelOrm):
     __tablename__ = 'workout_history_view'
 
-    user_id = Column(Integer, ForeignKey(PersonalDataOrm.id, ondelete='CASCADE'), primary_key=True)
-    workout_id = Column(Integer, ForeignKey(WorkoutOrm.id, ondelete='CASCADE'), primary_key=True)
+    user_id = Column(Integer)
+    workout_id = Column(Integer)
     timestamp = Column(DateTime)
     workout_length = Column(Integer)
     calories = Column(Integer)
