@@ -62,9 +62,9 @@ class WorkoutHistoryViewOrm(BaseModelOrm):
 
     user_id = Column(Integer, ForeignKey(PersonalDataOrm.id, ondelete='CASCADE'), primary_key=True)
     workout_id = Column(Integer, ForeignKey(WorkoutOrm.id, ondelete='CASCADE'), primary_key=True)
-    timestamp = Column(DateTime, default=func.current_timestamp())
-    workout_length = Column(Integer, default=0)
-    calories = Column(Integer, default=0)
+    timestamp = Column(DateTime)
+    workout_length = Column(Integer)
+    calories = Column(Integer)
     image_url = Column(String(255))
 
 class NutritionOrm(BaseModelOrm):
