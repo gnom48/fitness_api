@@ -66,6 +66,7 @@ class WorkoutHistoryViewOrm(BaseModelOrm):
     workout_length = Column(Integer)
     calories = Column(Integer)
     image_url = Column(String(255))
+    workout_name = Column(String(255))
 
 class NutritionOrm(BaseModelOrm):
     __tablename__ = 'nutrition'

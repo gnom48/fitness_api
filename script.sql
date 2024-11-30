@@ -61,7 +61,8 @@ SELECT
     timestamp,
     workout_length,
     (SELECT SUM(calories_burned) FROM exercises WHERE exercises.workout_id = workout_history.workout_id) AS calories,
-    (SELECT image_url FROM workouts WHERE workouts.id = workout_history.workout_id) AS image_url
+    (SELECT image_url FROM workouts WHERE workouts.id = workout_history.workout_id) AS image_url,
+    (SELECT name FROM workouts WHERE workouts.id = workout_history.workout_id) AS workout_name
 FROM workout_history
 ORDER BY timestamp;
 

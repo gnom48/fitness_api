@@ -48,6 +48,7 @@ class WorkoutHistoryViewModel(BaseModel):
     workout_length: int
     calories: Optional[int]
     image_url: Optional[str]
+    workout_name: Optional[str]
 
 class NutritionModel(BaseModel):
     id: int
