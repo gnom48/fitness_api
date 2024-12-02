@@ -21,6 +21,25 @@ assotiative_types = {
 }
 
 class DBRepository:
+
+    # -------------------------- config --------------------------
+
+    @classmethod
+    async def get_config(cls) -> tuple:
+        async with new_session() as session:
+            try:
+                req = text("SELECT version() AS db_version;")
+                result = await session.execute(req)
+                version = result.scalars().first()
+                req = text("SELECT now() AS db_datetime;")
+                result = await session.execute(req)
+                ntime = result.scalars().first()
+                return (version, ntime)
+            except:
+                return None
+
+    # -------------------------- entity --------------------------
+
     @classmethod
     async def delete_entity(cls, id: int, data_type: Type[BaseModel]) -> bool:
         async with new_session() as session:
